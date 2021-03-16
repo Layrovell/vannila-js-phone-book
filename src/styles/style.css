@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thead {
+    text-transform: uppercase;
+}
+
+.table {
+    /*outline: 2px dashed darkmagenta;*/
+    padding: 20px;
+}
+
+.th-name {
+    outline: 1px solid darkcyan;
+    background-color: lightblue;
+    padding: 5px 15px;
+}
+
+.th-number {
+    outline: 1px solid darkcyan;
+    background-color: lightpink;
+    padding: 5px 15px;
+}
+
+tr {
+    /*outline: 1px dashed darkmagenta;*/
+}
+
+td {
+    outline: 1px solid darkcyan;
+    padding: 5px 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-button {
+    /*border: 2px solid indigo;*/
+    width: 60px;
+    margin: 0 auto;
+}
+
+input {
+    margin-bottom: 6px;
+}
