@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -30,8 +36,8 @@ tr {
 }
 
 td {
-    outline: 1px solid darkcyan;
-    padding: 5px 15px;
+    outline: 1px solid lightgoldenrodyellow;
+    padding: 5px 10px;
 }
 
 .form {
@@ -50,4 +56,23 @@ td {
 
 input {
     margin-bottom: 6px;
+}
+
+.btn {
+    outline: none;
+    font-size: 12px;
+    padding: 2px 5px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-update {
+    background-color: linen;
+}
+
+.btn-remove {
+    background-color: lightsalmon;
 }

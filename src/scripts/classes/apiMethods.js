@@ -32,12 +32,12 @@ export class ApiMethods {
     }
   }
 
-  async create(number, name) {
+  async create(name, number) {
     try {
       const response = await fetch(`${BASE_URL}/users/create`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({number, name}),
+        body: JSON.stringify({name, number}),
       })
       const res = await response.json();
       return res;
@@ -78,5 +78,5 @@ export class ApiMethods {
   // .then(() => console.log(api.b));
 // console.log(b);
 // const c = new ApiMethods().update();
-// const d = new ApiMethods().delete('0eutqeRiTQvt4afe');
+// const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");
 // const table = new Interface().createTable();
