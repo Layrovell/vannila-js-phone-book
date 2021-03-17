@@ -110,4 +110,3 @@ export class Interface {
     createAddNumberForm() {
     }
 }
-
