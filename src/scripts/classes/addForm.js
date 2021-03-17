@@ -1,6 +1,6 @@
 'use strict';
 
-import {Controllers} from "./controllers.js";
+// import {Controllers} from "./controllers.js";
 
 export class AddForm {
     constructor(config) {
@@ -55,4 +55,4 @@ export class AddForm {
     }
 }
 
-const addFormToPage = new AddForm().createAddForm();
+// const addFormToPage = new AddForm().createAddForm();
