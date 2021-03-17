@@ -51,3 +51,15 @@ td {
 input {
     margin-bottom: 6px;
 }
+
+.btn {
+    outline: none;
+}
+
+.btn-remove {
+    background-color: #f8d2c0;
+}
+
+.btn-update {
+    background-color: #b4efb4;
+}

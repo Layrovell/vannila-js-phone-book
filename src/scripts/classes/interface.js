@@ -1,15 +1,16 @@
 'use strict';
 
+import {ApiMethods} from "./apiMethods.js";
+
 export class Interface {
-  constructor(root) {
+  constructor(root, config) {
     this.root = root;
+    this.config = config;
   }
 
   createTable(data) {
     const table = document.createElement('table');
-    this.root = document.getElementById('root');
     table.classList.add('table');
-    // table.id = 'myTable';
     const container = document.createElement('div');
     container.classList.add('container');
     container.prepend(table);
@@ -31,12 +32,54 @@ export class Interface {
     thead.appendChild(number);
     table.prepend(thead);
 
-    for (let i = 0; i < data.length; i++) {
-      let row = `<tr>
-                    <td>${data[i].name}</td>
-                    <td>${data[i].number}</td>
-                 </tr>`
-      table.innerHTML += row;
+    for (let user of data) {
+      const row = document.createElement('tr');
+
+      const userNameCell = this.createTableCell(user.name);
+      row.appendChild(userNameCell);
+
+      const userNumberCell = this.createTableCell(user.number);
+      row.appendChild(userNumberCell);
+
+      // const deleteButton = document.createElement('button');
+      // deleteButton.setAttribute('class', 'btn btn-remove');
+      // deleteButton.addEventListener('click', async () => {
+      //   console.log('delete: ', user._id);
+      //   await new ApiMethods().delete(user._id);
+      // });
+      // deleteButton.innerText = 'Delete';
+      const deleteButton = this.createTableButton('Delete', user._id, 'btn btn-remove', this.config.delete)
+      row.appendChild(deleteButton);
+
+      // const updateButton = document.createElement('button');
+      // updateButton.setAttribute('class', 'btn btn-update');
+      // updateButton.innerText = 'Update';
+      // updateButton.addEventListener('click', () => {
+      //   console.log('update:', user._id);
+      // });
+      const updateButton = this.createTableButton('Update', user._id, 'btn btn-update', this.config.update)
+      row.appendChild(updateButton);
+      table.appendChild(row);
     }
+  }
+
+  createTableCell(text) {
+    const cell = document.createElement('td');
+    cell.innerText = text;
+
+    return cell;
+  }
+
+  createTableButton(label, id, className, action) {
+    const button = document.createElement('button');
+    button.setAttribute('class', className);
+    button.innerText = label;
+
+    button.addEventListener('click', async () => {
+      console.log(label, id);
+      await action(id);
+    });
+
+    return button;
   }
 }

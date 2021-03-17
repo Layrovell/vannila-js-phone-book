@@ -6,7 +6,42 @@ import {Interface} from './interface.js';
 export class Controllers {
   constructor() {
     this.api = new ApiMethods();
-    this.Interface = new Interface();
+    this.Interface = new Interface(document.getElementById('root'), {
+      delete: this.removeItem.bind(this),
+      update: this.updateItem.bind(this),
+    });
+  }
+
+  async addItem(name, number, newContact) {
+    if (name && number) {
+      const response = await this.api.create(name, number);
+      newContact = response.newItem;
+      console.log(newContact);
+    } else {
+      console.log('Not all values are provided!');
+    }
+  }
+
+  async removeItem(id) {
+    if (id) {
+      await this.api.delete(id);
+      console.log(`user delete successfully!`);
+    } else {
+      console.log('Id is not provided!');
+    }
+  }
+
+  async updateItem(users, id, updatedItem) {
+    // if (id) {
+    //   const response = await this.api.delete(id);
+    //   updatedItem = response.newItem;
+    //   console.log(`updated item: ${updatedItem}`);
+    // } else {
+    //   console.log('Id is not provided!');
+    // }
+
+    // this.Interface.updateItem(this.users);
+    // console.log('update b')
   }
 
   async render() {
@@ -35,3 +70,5 @@ export class Controllers {
 }
 
 const qqq = new Controllers().render();
+// const addNew = new Controllers().addItem();
+// const removeItem = new Controllers().removeItem();
