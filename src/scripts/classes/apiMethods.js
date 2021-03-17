@@ -23,10 +23,7 @@ export class ApiMethods {
       }
 
       const res = await response.json();
-      const data = res.items;
-      // console.log('data: ', data)
-      this.users = data;
-      // console.log(this.users)
+      this.users = res.items;
     } catch (e) {
       console.warn('Error: ', e)
     }
@@ -55,7 +52,7 @@ export class ApiMethods {
           data,
         }),
       })
-      const res = await response.json();
+      await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
@@ -67,18 +64,9 @@ export class ApiMethods {
         method: 'GET',
       })
 
-      const res = await response.json();
+      await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
   }
 }
-
-// const a = new ApiMethods().getAll();
-// console.log(a);
-// const b = new ApiMethods().create('45678903456', 'father')
-// .then(() => console.log(api.b));
-// console.log(b);
-// const c = new ApiMethods().update();
-// const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");
-// const table = new Interface().createTable();

@@ -3,17 +3,18 @@
 import {Controllers} from "./controllers.js";
 
 export class AddForm {
-    constructor() {
+    constructor(config) {
         this.newContact = [];
         this.name = '';
         this.number = '';
+        // this.config = config;
     }
 
     createAddForm() {
-        const container = document.createElement('div');
-        container.classList.add('container');
+        const root = document.getElementById('root');
+        const app = document.createElement('div');
+        app.setAttribute('class', 'container');
 
-        const root = document.getElementById('root')
         const form = document.createElement('form');
         form.setAttribute('class', 'form');
         const button = document.createElement("button");
@@ -45,13 +46,13 @@ export class AddForm {
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // await this.addNewContact(this.number, this.name);
+            // await this.config.addItem(this.name, this.number, this.newContact);
             await new Controllers().addItem(this.name, this.number, this.newContact);
-            // console.log(this.newContact);
         });
-        root.before(form);
+        // root.prepend(form);
+        root.appendChild(app);
+        app.prepend(form);
     }
 }
 
-const createForm = new AddForm();
-const addFormToPage = createForm.createAddForm();
+const addFormToPage = new AddForm().createAddForm();

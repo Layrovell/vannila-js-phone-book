@@ -7,10 +7,15 @@ export class Controllers {
   constructor() {
     this.api = new ApiMethods();
     this.Interface = new Interface(document.getElementById('root'), {
+      addItem: this.addItem.bind(this),
       delete: this.removeItem.bind(this),
       update: this.updateItem.bind(this),
     });
   }
+
+  // async createForm(name, number, newContact) {
+  //   await this.addItem(name, number, newContact);
+  // }
 
   async addItem(name, number, newContact) {
     if (name && number) {
@@ -43,6 +48,7 @@ export class Controllers {
   async render() {
     const users = await this.api.getAll().then(() => this.api.users);
     const table = await this.Interface.createTable(users);
+    // const addForm = await this.Interface.createAddForm();
 
     console.log(users);
 
@@ -60,9 +66,19 @@ export class Controllers {
       }
     }
 
-    ReactDOM.render(table,
+    ReactDOM.render(
+        // addForm,
+        table,
         document.getElementById('root'))
   }
 }
 
-const qqq = new Controllers().render();
+// const qqq = new Controllers().render();
+
+const app = new Controllers({
+  baseURL: 'http://localhost:8008',
+  node: '#appContainer'
+});
+app.render();
+
+// const qqq = new Controllers().createAddForm();

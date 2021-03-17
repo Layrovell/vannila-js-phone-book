@@ -12,12 +12,12 @@ export class Interface {
     }
 
     createTable(data) {
+        const app = document.querySelector('.container');
+        console.log(app);
+
         const table = document.createElement('table');
         table.classList.add('table');
-        const container = document.createElement('div');
-        container.classList.add('container');
-        container.prepend(table);
-        this.root.prepend(container);
+        app.appendChild(table);
 
         const name = document.createElement('th');
         name.classList.add('th-name');
@@ -75,6 +75,9 @@ export class Interface {
             row.appendChild(updateButtonCell);
             table.appendChild(row);
         }
+
+        const openBtn = this.createOpenButton('Open');
+        app.prepend(openBtn);
     }
 
     createTableCell(text) {
@@ -95,4 +98,17 @@ export class Interface {
 
         return button;
     }
+
+    createOpenButton(text) {
+        const openButton = document.createElement('button');
+        openButton.setAttribute('class', 'open-button');
+        openButton.innerText = text;
+
+        return openButton;
+    }
+
+    createAddNumberForm() {
+    }
 }
+
+// new Interface().openButton();
