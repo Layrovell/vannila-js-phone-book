@@ -1,6 +1,6 @@
 'use strict';
 
-const BASE_URL = 'http://localhost:8008/api';
+const BASE_URL = 'http://localhost:8008/api/users';
 
 export class ApiMethods {
   constructor() {
@@ -9,7 +9,7 @@ export class ApiMethods {
 
   async getAll() {
     try {
-      const response = await fetch(`${BASE_URL}/users/get`, {
+      const response = await fetch(`${BASE_URL}/get`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
       })
@@ -34,24 +34,26 @@ export class ApiMethods {
 
   async create(name, number) {
     try {
-      const response = await fetch(`${BASE_URL}/users/create`, {
+      const response = await fetch(`${BASE_URL}/create`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({name, number}),
       })
-      const res = await response.json();
-      return res;
+      return await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
   }
 
-  async update(id) {
+  async update(id, data) {
     try {
-      const response = await fetch(`${BASE_URL}/users/update`, {
+      const response = await fetch(`${BASE_URL}/update`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify(id),
+        body: JSON.stringify({
+          id,
+          data,
+        }),
       })
       const res = await response.json();
     } catch (e) {
@@ -61,7 +63,7 @@ export class ApiMethods {
 
   async delete(id) {
     try {
-      const response = await fetch(`${BASE_URL}/users/delete/${id}`, {
+      const response = await fetch(`${BASE_URL}/delete/${id}`, {
         method: 'GET',
       })
 
@@ -75,7 +77,7 @@ export class ApiMethods {
 // const a = new ApiMethods().getAll();
 // console.log(a);
 // const b = new ApiMethods().create('45678903456', 'father')
-  // .then(() => console.log(api.b));
+// .then(() => console.log(api.b));
 // console.log(b);
 // const c = new ApiMethods().update();
 // const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");

@@ -6,8 +6,10 @@ import {Interface} from './interface.js';
 export class Controllers {
   constructor() {
     this.api = new ApiMethods();
-    this.Interface = new Interface();
-    this.users = [];
+    this.Interface = new Interface(document.getElementById('root'), {
+      delete: this.removeItem.bind(this),
+      update: this.updateItem.bind(this),
+    });
   }
 
   async addItem(name, number, newContact) {
@@ -20,45 +22,29 @@ export class Controllers {
     }
   }
 
-  async updateItem(users, id, updatedItem) {
-    // if (id) {
-    //   const response = await this.api.delete(id);
-    //   updatedItem = response.newItem;
-    //   console.log(`updated item: ${updatedItem}`);
-    // } else {
-    //   console.log('Id is not provided!');
-    // }
-
-    // this.Interface.updateItem(this.users);
-    // console.log('update b')
+  async removeItem(id) {
+    if (id) {
+      await this.api.delete(id);
+      console.log(`user delete successfully! ${id}`);
+    } else {
+      console.log('Id is not provided!');
+    }
   }
 
-  async removeItem(id) {
-    // new Interface().deleteItem(this.users);
-    // await this.api.delete(id);
-    // if (id) {
-    //   await this.api.delete(id);
-    //   console.log(`user delete successfully!`);
-    // } else {
-    //   console.log('Id is not provided!');
-    // }
-
-    // for (let user of this.users) {
-    //   const removeBtnAll = document.querySelectorAll('.btn-remove');
-    //   for (const btn of removeBtnAll) {
-    //     btn.addEventListener('click', (e) => {
-    //       // this.api.delete(this.user._id);
-    //       this.api.delete(user._id);
-    //       console.log('delete')
-    //     })
-    //   }
-    // }
+  async updateItem(data) {
+    if (data) {
+      await this.api.update(data);
+      console.log(`user update successfully! ${data.id}`);
+    } else {
+      console.log('Id is not provided!');
+    }
   }
 
   async render() {
-    this.users = await this.api.getAll().then(() => this.api.users);
-    const table = await new Interface().createTable(this.users);
-    console.log(this.users);
+    const users = await this.api.getAll().then(() => this.api.users);
+    const table = await this.Interface.createTable(users);
+
+    console.log(users);
 
     const React = {
       createElement(tagName, props, content) {
@@ -75,11 +61,10 @@ export class Controllers {
     }
 
     ReactDOM.render(table,
-      document.getElementById('root'))
+        document.getElementById('root'))
   }
 }
 
 const qqq = new Controllers().render();
-const addNew = new Controllers().addItem();
-// const del = new Controllers().updateItem();
-
+// const addNew = new Controllers().addItem();
+// const removeItem = new Controllers().removeItem();
