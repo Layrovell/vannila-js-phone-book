@@ -66,5 +66,3 @@ export class Controllers {
 }
 
 const qqq = new Controllers().render();
-// const addNew = new Controllers().addItem();
-// const removeItem = new Controllers().removeItem();
