@@ -50,8 +50,6 @@ export class Controllers {
   }
 }
 
-// const qqq = new Controllers().render();
-
 const app = new Controllers({
   baseURL: 'http://localhost:8008',
   node: 'appContainer'
