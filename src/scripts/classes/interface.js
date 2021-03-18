@@ -1,7 +1,10 @@
-'use strict';
+import {AddForm} from "./addForm.js";
 
 export class Interface {
     constructor(root, config) {
+        this.AddForm = new AddForm({
+            addItem: config.addItem,
+        });
         this.root = root;
         this.config = config;
         this.info = {
@@ -11,35 +14,32 @@ export class Interface {
         }
     }
 
+    createForm() {
+        this.AddForm.createAddForm();
+    }
+
     createTable(data) {
         const app = document.querySelector('.container');
-        console.log(app);
+        const form = document.querySelector('.form');
+        const formContainer = document.querySelector('.form-container');
 
         const table = document.createElement('table');
         table.classList.add('table');
         app.appendChild(table);
 
-        const name = document.createElement('th');
-        name.classList.add('th-name');
-        name.innerText = 'name';
-        table.appendChild(name);
-
-        const number = document.createElement('th');
-        number.classList.add('th-number');
-        number.innerText = 'number';
-        table.appendChild(number);
-
-        const optionDelete = document.createElement('th');
-        optionDelete.classList.add('th-options');
-        optionDelete.innerText = 'delete';
-        table.appendChild(optionDelete);
-
         const thead = document.createElement('thead');
         thead.classList.add('thead');
-        thead.appendChild(name);
-        thead.appendChild(number);
-        thead.appendChild(optionDelete);
-        table.prepend(thead);
+
+        ['name', 'number', 'delete', 'update'].forEach(el => {
+            const th = document.createElement('th');
+            th.innerHTML = `${el}`;
+            th.classList.add(`th-${el}`);
+            table.appendChild(th);
+            thead.appendChild(th);
+
+            table.prepend(thead);
+        })
+
 
         for (let user of data) {
             const row = document.createElement('tr');
@@ -77,7 +77,10 @@ export class Interface {
         }
 
         const openBtn = this.createOpenButton('Open');
-        app.prepend(openBtn);
+        formContainer.prepend(openBtn);
+        openBtn.addEventListener('click', (e) => {
+            form.classList.toggle('open');
+        })
     }
 
     createTableCell(text) {
@@ -99,14 +102,24 @@ export class Interface {
         return button;
     }
 
+    createRoot() {
+        const root = document.createElement('div');
+        root.setAttribute('id', this.root);
+        const body = document.getElementsByTagName('body')[0];
+        body.appendChild(root);
+
+        const app = document.createElement('div');
+        app.setAttribute('class', 'container');
+
+        root.appendChild(app);
+        console.log(root);
+    }
+
     createOpenButton(text) {
         const openButton = document.createElement('button');
-        openButton.setAttribute('class', 'open-button');
+        openButton.setAttribute('class', 'btn btn-open');
         openButton.innerText = text;
 
         return openButton;
-    }
-
-    createAddNumberForm() {
     }
 }

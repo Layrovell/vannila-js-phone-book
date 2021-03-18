@@ -1,31 +1,29 @@
-'use strict';
-
-// import {Controllers} from "./controllers.js";
-
 export class AddForm {
     constructor(config) {
         this.newContact = [];
         this.name = '';
         this.number = '';
-        // this.config = config;
+        this.config = config;
     }
 
     createAddForm() {
-        const root = document.getElementById('root');
-        const app = document.createElement('div');
-        app.setAttribute('class', 'container');
+        const container = document.querySelector('.container');
+        const formContainer = document.createElement('div');
+        formContainer.setAttribute('class', 'form-container');
 
         const form = document.createElement('form');
         form.setAttribute('class', 'form');
+
         const button = document.createElement("button");
         button.innerHTML = "Add";
         button.type = 'submit';
-        button.setAttribute('class', 'form-button');
+        button.setAttribute('class', 'btn btn-form');
 
         ['name', 'number'].forEach(labelName => {
             const isName = labelName === 'name';
             const label = document.createElement('label');
             const input = document.createElement('input');
+            input.setAttribute('class', 'input');
             input.type = 'text';
             input.id = `form-${labelName}`;
             input.placeholder = isName ? 'Alyona' : '+8 880 2020 534';
@@ -46,13 +44,10 @@ export class AddForm {
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            // await this.config.addItem(this.name, this.number, this.newContact);
-            await new Controllers().addItem(this.name, this.number, this.newContact);
+            await this.config.addItem(this.name, this.number, this.newContact);
         });
-        // root.prepend(form);
-        root.appendChild(app);
-        app.prepend(form);
+
+        container.appendChild(formContainer);
+        formContainer.appendChild(form);
     }
 }
-
-// const addFormToPage = new AddForm().createAddForm();

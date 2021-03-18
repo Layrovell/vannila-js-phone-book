@@ -1,21 +1,16 @@
-'use strict';
-
 import {ApiMethods} from "./apiMethods.js";
 import {Interface} from './interface.js';
 
 export class Controllers {
-  constructor() {
-    this.api = new ApiMethods();
-    this.Interface = new Interface(document.getElementById('root'), {
+  constructor({baseURL, node}) {
+    this.api = new ApiMethods(baseURL);
+    this.Interface = new Interface(node, {
       addItem: this.addItem.bind(this),
       delete: this.removeItem.bind(this),
       update: this.updateItem.bind(this),
+      node,
     });
   }
-
-  // async createForm(name, number, newContact) {
-  //   await this.addItem(name, number, newContact);
-  // }
 
   async addItem(name, number, newContact) {
     if (name && number) {
@@ -47,38 +42,16 @@ export class Controllers {
 
   async render() {
     const users = await this.api.getAll().then(() => this.api.users);
-    const table = await this.Interface.createTable(users);
-    // const addForm = await this.Interface.createAddForm();
+    this.Interface.createRoot();
+    this.Interface.createForm();
+    this.Interface.createTable(users);
 
     console.log(users);
-
-    const React = {
-      createElement(tagName, props, content) {
-        const child = document.createElement(tagName);
-        child.textContent = content;
-        return child;
-      }
-    }
-
-    const ReactDOM = {
-      render(child, container) {
-        container.appendChild(child);
-      }
-    }
-
-    ReactDOM.render(
-        // addForm,
-        table,
-        document.getElementById('root'))
   }
 }
 
-// const qqq = new Controllers().render();
-
 const app = new Controllers({
   baseURL: 'http://localhost:8008',
-  node: '#appContainer'
+  node: 'appContainer'
 });
 app.render();
-
-// const qqq = new Controllers().createAddForm();

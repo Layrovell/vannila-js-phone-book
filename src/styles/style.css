@@ -2,6 +2,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     outline: none;
+    font-size: 18px;
 }
 
 .container {
@@ -11,19 +12,48 @@ body {
     flex-direction: column;
 }
 
-.thead {
-    /*text-transform: uppercase;*/
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 180px;
 }
 
+/*start form*/
+.form {
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-form {
+    width: 60px;
+    margin: 0 auto;
+    background-color: darkcyan;
+}
+
+.input {
+    margin-bottom: 6px;
+}
+/*end form*/
+
+/*start table*/
 .table {
-    /*outline: 2px dashed darkmagenta;*/
-    padding: 20px;
+    border-spacing: 0;
+}
+
+.thead {
+    text-transform: capitalize;
 }
 
 td,
 .th-name,
 .th-number,
-.th-options {
+.th-delete,
+.th-update {
     padding: 5px 15px;
 }
 
@@ -35,34 +65,22 @@ td,
     background-color: lightpink;
 }
 
-.th-options {
+.th-delete,
+.th-update {
     background-color: lightsalmon;
 }
 
 td {
-    /*outline: 1px solid maroon;*/
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
 }
+/*end table*/
 
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.form-button {
-    width: 60px;
-    margin: 0 auto;
-}
-
-input {
-    margin-bottom: 6px;
-}
-
+/*start buttons*/
 .btn {
     outline: none;
     margin: 2px;
+    width: 60px;
+    padding: 4px 8px;
 }
 
 .btn-remove {
@@ -71,4 +89,14 @@ input {
 
 .btn-update {
     background-color: #b4efb4;
+}
+
+.btn-open {
+    background-color: darkmagenta;
+}
+/*end buttons*/
+
+/*helpers*/
+.open {
+    display: block;
 }
