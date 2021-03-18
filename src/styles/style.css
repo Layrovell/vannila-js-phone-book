@@ -2,6 +2,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     outline: none;
+    font-size: 18px;
 }
 
 .container {
@@ -12,12 +13,11 @@ body {
 }
 
 .thead {
-    /*text-transform: uppercase;*/
+    text-transform: capitalize;
 }
 
 .table {
-    /*outline: 2px dashed darkmagenta;*/
-    padding: 20px;
+    border-spacing: 0;
 }
 
 td,
@@ -40,20 +40,25 @@ td,
 }
 
 td {
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
+}
+
+td {
     /*outline: 1px solid maroon;*/
 }
 
 .form {
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 200px;
     margin: 0 auto;
     text-align: center;
 }
 
-.form-button {
+.btn-form {
     width: 60px;
     margin: 0 auto;
+    background-color: darkcyan;
 }
 
 input {
@@ -63,6 +68,8 @@ input {
 .btn {
     outline: none;
     margin: 2px;
+    width: 60px;
+    padding: 4px 8px;
 }
 
 .btn-remove {
@@ -71,4 +78,14 @@ input {
 
 .btn-update {
     background-color: #b4efb4;
+}
+
+.btn-open {
+    background-color: darkmagenta;
+}
+
+/*helpers*/
+
+.open {
+    display: block;
 }

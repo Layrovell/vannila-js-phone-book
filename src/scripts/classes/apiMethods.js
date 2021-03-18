@@ -1,15 +1,12 @@
-'use strict';
-
-const BASE_URL = 'http://localhost:8008/api/users';
-
 export class ApiMethods {
-  constructor() {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
     this.users = [];
   }
 
   async getAll() {
     try {
-      const response = await fetch(`${BASE_URL}/get`, {
+      const response = await fetch(`${this.baseURL}/api/users/get`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
       })
@@ -27,11 +24,13 @@ export class ApiMethods {
     } catch (e) {
       console.warn('Error: ', e)
     }
+    console.log(this.baseURL)
+
   }
 
   async create(name, number) {
     try {
-      const response = await fetch(`${BASE_URL}/create`, {
+      const response = await fetch(`${this.baseURL}/api/users/create`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({name, number}),
@@ -42,15 +41,12 @@ export class ApiMethods {
     }
   }
 
-  async update(id, data) {
+  async update(id) {
     try {
-      const response = await fetch(`${BASE_URL}/update`, {
+      const response = await fetch(`${this.baseURL}/api/users/update`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({
-          id,
-          data,
-        }),
+        body: JSON.stringify(id),
       })
       await response.json();
     } catch (e) {
@@ -60,7 +56,7 @@ export class ApiMethods {
 
   async delete(id) {
     try {
-      const response = await fetch(`${BASE_URL}/delete/${id}`, {
+      const response = await fetch(`${this.baseURL}/api/users/delete/${id}`, {
         method: 'GET',
       })
 
@@ -70,3 +66,12 @@ export class ApiMethods {
     }
   }
 }
+
+// const a = new ApiMethods().getAll();
+// console.log(a);
+// const b = new ApiMethods().create('45678903456', 'father')
+  // .then(() => console.log(api.b));
+// console.log(b);
+// const c = new ApiMethods().update();
+// const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");
+// const table = new Interface().createTable();

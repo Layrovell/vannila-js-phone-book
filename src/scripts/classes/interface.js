@@ -1,112 +1,239 @@
-'use strict';
+// export class Interface {
+//   constructor(root, config) {
+//     this.root = root;
+//     this.config = config;
+//   }
+//
+//   createTable(data) {
+//     const table = document.createElement('table');
+//     table.classList.add('table');
+//     const container = document.createElement('div');
+//     container.classList.add('container');
+//     container.prepend(table);
+//     this.root.prepend(container);
+//
+//     const name = document.createElement('th');
+//     name.classList.add('th-name');
+//     name.innerText = 'name';
+//     table.appendChild(name);
+//
+//     const number = document.createElement('th');
+//     number.classList.add('th-number');
+//     number.innerText = 'number';
+//     table.appendChild(number);
+//
+//     const thead = document.createElement('thead');
+//     thead.classList.add('thead');
+//     thead.appendChild(name);
+//     thead.appendChild(number);
+//     table.prepend(thead);
+//
+//     for (let user of data) {
+//       const row = document.createElement('tr');
+//
+//       const userNameCell = this.createTableCell(user.name);
+//       row.appendChild(userNameCell);
+//
+//       const userNumberCell = this.createTableCell(user.number);
+//       row.appendChild(userNumberCell);
+//
+//       // const deleteButton = document.createElement('button');
+//       // deleteButton.setAttribute('class', 'btn btn-remove');
+//       // deleteButton.addEventListener('click', async () => {
+//       //   console.log('delete: ', user._id);
+//       //   await new ApiMethods().delete(user._id);
+//       // });
+//       // deleteButton.innerText = 'Delete';
+//       const deleteButton = this.createTableButton('Delete', user._id, 'btn btn-remove', this.config.delete)
+//       row.appendChild(deleteButton);
+//
+//       // const updateButton = document.createElement('button');
+//       // updateButton.setAttribute('class', 'btn btn-update');
+//       // updateButton.innerText = 'Update';
+//       // updateButton.addEventListener('click', () => {
+//       //   console.log('update:', user._id);
+//       // });
+//       const updateButton = this.createTableButton('Update', user._id, 'btn btn-update', this.config.update)
+//       row.appendChild(updateButton);
+//       table.appendChild(row);
+//     }
+//   }
+//
+//   createTableCell(text) {
+//     const cell = document.createElement('td');
+//     cell.innerText = text;
+//
+//     return cell;
+//   }
+//
+//   createTableButton(label, id, className, action) {
+//     const button = document.createElement('button');
+//     button.setAttribute('class', className);
+//     button.innerText = label;
+//
+//     button.addEventListener('click', async () => {
+//       console.log(label, id);
+//       await action(id);
+//     });
+//
+//     return button;
+//   }
+//
+//   deleteItem(data) {
+//     console.log('del');
+//
+//     // for (const user of data) {
+//     //   const deleteBtnAll = document.querySelectorAll('.btn-delete');
+//     //   for (const btn of deleteBtnAll) {
+//     //     btn.addEventListener('click', (e) => {
+//     //       console.log(user._id);
+//     //     })
+//     //   }
+//     // }
+//   }
+//
+//   updateItem(data) {
+//     console.log('upd');
+//   }
+// }
+
+import {AddForm} from "./addForm.js";
 
 export class Interface {
-    constructor(root, config) {
-        this.root = root;
-        this.config = config;
-        this.info = {
-            id: 0,
-            name: '',
-            number: 0,
-        }
+  constructor(root, config) {
+    this.AddForm = new AddForm({
+      addItem: config.addItem,
+    });
+    this.root = root;
+    this.config = config;
+    this.info = {
+      id: 0,
+      name: '',
+      number: 0,
+    }
+  }
+
+  createForm() {
+    this.AddForm.createAddForm();
+  }
+
+  createTable(data) {
+    const app = document.querySelector('.container');
+    const form = document.querySelector('.form');
+
+    const table = document.createElement('table');
+    table.classList.add('table');
+    app.appendChild(table);
+
+    const name = document.createElement('th');
+    name.classList.add('th-name');
+    name.innerText = 'name';
+    table.appendChild(name);
+
+    const number = document.createElement('th');
+    number.classList.add('th-number');
+    number.innerText = 'number';
+    table.appendChild(number);
+
+    const optionDelete = document.createElement('th');
+    optionDelete.classList.add('th-options');
+    optionDelete.innerText = 'delete';
+    table.appendChild(optionDelete);
+
+    const optionUpdate = document.createElement('th');
+    optionUpdate.classList.add('th-options');
+    optionUpdate.innerText = 'update';
+    table.appendChild(optionUpdate);
+
+    const thead = document.createElement('thead');
+    thead.classList.add('thead');
+    thead.appendChild(name);
+    thead.appendChild(number);
+    thead.appendChild(optionDelete);
+    thead.appendChild(optionUpdate);
+    table.prepend(thead);
+
+    for (let user of data) {
+      const row = document.createElement('tr');
+
+      this.info.id = user._id;
+      this.info.name = user.name;
+      this.info.number = user.number;
+
+      const userNameCell = this.createTableCell(this.info.name);
+      row.appendChild(userNameCell);
+
+      const userNumberCell = this.createTableCell(this.info.number);
+      row.appendChild(userNumberCell);
+
+      const deleteButton = this.createTableButton(
+        'Delete',
+        this.info.id,
+        'btn btn-remove',
+        this.config.delete,
+      );
+      const deleteButtonCell = document.createElement('td');
+      deleteButtonCell.append(deleteButton);
+      row.appendChild(deleteButtonCell);
+
+      const updateButton = this.createTableButton(
+        'Update',
+        this.info,
+        'btn btn-update',
+        this.config.update,
+      );
+      const updateButtonCell = document.createElement('td');
+      updateButtonCell.append(updateButton);
+      row.appendChild(updateButtonCell);
+      table.appendChild(row);
     }
 
-    createTable(data) {
-        const app = document.querySelector('.container');
-        console.log(app);
+    const openBtn = this.createOpenButton('Open');
+    app.prepend(openBtn);
+    openBtn.addEventListener('click', (e) => {
+      form.classList.toggle('open');
+    })
+  }
 
-        const table = document.createElement('table');
-        table.classList.add('table');
-        app.appendChild(table);
+  createTableCell(text) {
+    const cell = document.createElement('td');
+    cell.innerText = text;
 
-        const name = document.createElement('th');
-        name.classList.add('th-name');
-        name.innerText = 'name';
-        table.appendChild(name);
+    return cell;
+  }
 
-        const number = document.createElement('th');
-        number.classList.add('th-number');
-        number.innerText = 'number';
-        table.appendChild(number);
+  createTableButton(label, data, className, action) {
+    const button = document.createElement('button');
+    button.setAttribute('class', className);
+    button.innerText = label;
 
-        const optionDelete = document.createElement('th');
-        optionDelete.classList.add('th-options');
-        optionDelete.innerText = 'delete';
-        table.appendChild(optionDelete);
+    button.addEventListener('click', async () => {
+      await action(data);
+    });
 
-        const thead = document.createElement('thead');
-        thead.classList.add('thead');
-        thead.appendChild(name);
-        thead.appendChild(number);
-        thead.appendChild(optionDelete);
-        table.prepend(thead);
+    return button;
+  }
 
-        for (let user of data) {
-            const row = document.createElement('tr');
+  createRoot() {
+    const root = document.createElement('div');
+    root.setAttribute('id', this.root);
+    const body = document.getElementsByTagName('body')[0];
+    body.appendChild(root);
 
-            this.info.id = user._id;
-            this.info.name = user.name;
-            this.info.number = user.number;
+    const app = document.createElement('div');
+    app.setAttribute('class', 'container');
 
-            const userNameCell = this.createTableCell(this.info.name);
-            row.appendChild(userNameCell);
+    root.appendChild(app);
+  }
 
-            const userNumberCell = this.createTableCell(this.info.number);
-            row.appendChild(userNumberCell);
+  createOpenButton(text) {
+    const openButton = document.createElement('button');
+    openButton.setAttribute('class', 'btn btn-open');
+    openButton.innerText = text;
 
-            const deleteButton = this.createTableButton(
-                'Delete',
-                this.info.id,
-                'btn btn-remove',
-                this.config.delete,
-            );
-            const deleteButtonCell = document.createElement('td');
-            deleteButtonCell.append(deleteButton);
-            row.appendChild(deleteButtonCell);
+    return openButton;
+  }
 
-            const updateButton = this.createTableButton(
-                'Update',
-                this.info,
-                'btn btn-update',
-                this.config.update,
-            );
-            const updateButtonCell = document.createElement('td');
-            updateButtonCell.append(updateButton);
-            row.appendChild(updateButtonCell);
-            table.appendChild(row);
-        }
-
-        const openBtn = this.createOpenButton('Open');
-        app.prepend(openBtn);
-    }
-
-    createTableCell(text) {
-        const cell = document.createElement('td');
-        cell.innerText = text;
-
-        return cell;
-    }
-
-    createTableButton(label, data, className, action) {
-        const button = document.createElement('button');
-        button.setAttribute('class', className);
-        button.innerText = label;
-
-        button.addEventListener('click', async () => {
-            await action(data);
-        });
-
-        return button;
-    }
-
-    createOpenButton(text) {
-        const openButton = document.createElement('button');
-        openButton.setAttribute('class', 'open-button');
-        openButton.innerText = text;
-
-        return openButton;
-    }
-
-    createAddNumberForm() {
-    }
+  createAddNumberForm() {
+  }
 }
