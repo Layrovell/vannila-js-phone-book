@@ -4,7 +4,11 @@ import {Interface} from './interface.js';
 export class Controllers {
   constructor({baseURL, node}) {
     this.api = new ApiMethods(baseURL);
+<<<<<<< HEAD
     this.Interface = new Interface(node, {
+=======
+    this.Interface = new Interface(document.querySelector(node), {
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
       addItem: this.addItem.bind(this),
       delete: this.removeItem.bind(this),
       update: this.updateItem.bind(this),
@@ -54,4 +58,8 @@ const app = new Controllers({
   baseURL: 'http://localhost:8008',
   node: 'appContainer'
 });
+<<<<<<< HEAD
 app.render();
+=======
+app.render();
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7

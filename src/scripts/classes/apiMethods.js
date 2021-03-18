@@ -25,6 +25,10 @@ export class ApiMethods {
       console.warn('Error: ', e)
     }
     console.log(this.baseURL)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
   }
 
   async create(name, number) {

@@ -12,12 +12,17 @@ body {
     flex-direction: column;
 }
 
+<<<<<<< HEAD
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 180px;
+=======
+.thead {
+    text-transform: capitalize;
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
 }
 
 /*start form*/
@@ -43,10 +48,13 @@ body {
 /*start table*/
 .table {
     border-spacing: 0;
+<<<<<<< HEAD
 }
 
 .thead {
     text-transform: capitalize;
+=======
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
 }
 
 td,
@@ -72,6 +80,31 @@ td,
 
 td {
     box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
+<<<<<<< HEAD
+=======
+}
+
+td {
+    /*outline: 1px solid maroon;*/
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn-form {
+    width: 60px;
+    margin: 0 auto;
+    background-color: darkcyan;
+}
+
+input {
+    margin-bottom: 6px;
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
 }
 /*end table*/
 
@@ -94,9 +127,18 @@ td {
 .btn-open {
     background-color: darkmagenta;
 }
+<<<<<<< HEAD
 /*end buttons*/
 
 /*helpers*/
 .open {
     display: block;
 }
+=======
+
+/*helpers*/
+
+.open {
+    display: block;
+}
+>>>>>>> 5278b78bcfbf848b1b436e4c7401b59174cc6cd7
