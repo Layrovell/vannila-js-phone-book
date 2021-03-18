@@ -7,7 +7,9 @@ export class AddForm {
   }
 
   createAddForm() {
-    const app = document.querySelector('.container');
+    const container = document.querySelector('.container');
+    const formContainer = document.createElement('div');
+    formContainer.setAttribute('class', 'form-container');
 
     const form = document.createElement('form');
     form.setAttribute('class', 'form');
@@ -21,6 +23,7 @@ export class AddForm {
       const isName = labelName === 'name';
       const label = document.createElement('label');
       const input = document.createElement('input');
+      input.setAttribute('class', 'input');
       input.type = 'text';
       input.id = `form-${labelName}`;
       input.placeholder = isName ? 'Alyona' : '+8 880 2020 534';
@@ -41,12 +44,10 @@ export class AddForm {
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // await this.config.addItem(this.name, this.number, this.newContact);
       await this.config.addItem(this.name, this.number, this.newContact);
     });
 
-    app.prepend(form);
-
-    console.log(this)
+    container.appendChild(formContainer);
+    formContainer.appendChild(form);
   }
 }

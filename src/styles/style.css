@@ -12,41 +12,15 @@ body {
     flex-direction: column;
 }
 
-.thead {
-    text-transform: capitalize;
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 180px;
 }
 
-.table {
-    border-spacing: 0;
-}
-
-td,
-.th-name,
-.th-number,
-.th-options {
-    padding: 5px 15px;
-}
-
-.th-name {
-    background-color: lightblue;
-}
-
-.th-number {
-    background-color: lightpink;
-}
-
-.th-options {
-    background-color: lightsalmon;
-}
-
-td {
-    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
-}
-
-td {
-    /*outline: 1px solid maroon;*/
-}
-
+/*start form*/
 .form {
     display: none;
     flex-direction: column;
@@ -61,10 +35,47 @@ td {
     background-color: darkcyan;
 }
 
-input {
+.input {
     margin-bottom: 6px;
 }
+/*end form*/
 
+/*start table*/
+.table {
+    border-spacing: 0;
+}
+
+.thead {
+    text-transform: capitalize;
+}
+
+td,
+.th-name,
+.th-number,
+.th-delete,
+.th-update {
+    padding: 5px 15px;
+}
+
+.th-name {
+    background-color: lightblue;
+}
+
+.th-number {
+    background-color: lightpink;
+}
+
+.th-delete,
+.th-update {
+    background-color: lightsalmon;
+}
+
+td {
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
+}
+/*end table*/
+
+/*start buttons*/
 .btn {
     outline: none;
     margin: 2px;
@@ -83,9 +94,9 @@ input {
 .btn-open {
     background-color: darkmagenta;
 }
+/*end buttons*/
 
 /*helpers*/
-
 .open {
     display: block;
 }

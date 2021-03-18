@@ -4,7 +4,7 @@ import {Interface} from './interface.js';
 export class Controllers {
   constructor({baseURL, node}) {
     this.api = new ApiMethods(baseURL);
-    this.Interface = new Interface(document.querySelector(node), {
+    this.Interface = new Interface(node, {
       addItem: this.addItem.bind(this),
       delete: this.removeItem.bind(this),
       update: this.updateItem.bind(this),
