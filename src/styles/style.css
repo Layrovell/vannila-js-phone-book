@@ -1,51 +1,64 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 18px;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .thead {
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .table {
-    /*outline: 2px dashed darkmagenta;*/
-    padding: 20px;
+    border-spacing: 0;
+}
+
+td,
+.th-name,
+.th-number,
+.th-options {
+    padding: 5px 15px;
 }
 
 .th-name {
-    outline: 1px solid darkcyan;
     background-color: lightblue;
-    padding: 5px 15px;
 }
 
 .th-number {
-    outline: 1px solid darkcyan;
     background-color: lightpink;
-    padding: 5px 15px;
 }
 
-tr {
-    /*outline: 1px dashed darkmagenta;*/
+.th-options {
+    background-color: lightsalmon;
 }
 
 td {
-    outline: 1px solid darkcyan;
-    padding: 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
+}
+
+td {
+    /*outline: 1px solid maroon;*/
 }
 
 .form {
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 200px;
     margin: 0 auto;
     text-align: center;
 }
 
-.form-button {
-    /*border: 2px solid indigo;*/
+.btn-form {
     width: 60px;
     margin: 0 auto;
+    background-color: darkcyan;
 }
 
 input {
@@ -54,6 +67,9 @@ input {
 
 .btn {
     outline: none;
+    margin: 2px;
+    width: 60px;
+    padding: 4px 8px;
 }
 
 .btn-remove {
@@ -62,4 +78,14 @@ input {
 
 .btn-update {
     background-color: #b4efb4;
+}
+
+.btn-open {
+    background-color: darkmagenta;
+}
+
+/*helpers*/
+
+.open {
+    display: block;
 }

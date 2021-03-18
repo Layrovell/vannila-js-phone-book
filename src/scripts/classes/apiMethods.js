@@ -1,15 +1,12 @@
-'use strict';
-
-const BASE_URL = 'http://localhost:8008/api';
-
 export class ApiMethods {
-  constructor() {
+  constructor(baseURL) {
+    this.baseURL = baseURL;
     this.users = [];
   }
 
   async getAll() {
     try {
-      const response = await fetch(`${BASE_URL}/users/get`, {
+      const response = await fetch(`${this.baseURL}/api/users/get`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
       })
@@ -23,24 +20,22 @@ export class ApiMethods {
       }
 
       const res = await response.json();
-      const data = res.items;
-      // console.log('data: ', data)
-      this.users = data;
-      // console.log(this.users)
+      this.users = res.items;
     } catch (e) {
       console.warn('Error: ', e)
     }
+    console.log(this.baseURL)
+
   }
 
-  async create(number, name) {
+  async create(name, number) {
     try {
-      const response = await fetch(`${BASE_URL}/users/create`, {
+      const response = await fetch(`${this.baseURL}/api/users/create`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
-        body: JSON.stringify({number, name}),
+        body: JSON.stringify({name, number}),
       })
-      const res = await response.json();
-      return res;
+      return await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
@@ -48,12 +43,12 @@ export class ApiMethods {
 
   async update(id) {
     try {
-      const response = await fetch(`${BASE_URL}/users/update`, {
+      const response = await fetch(`${this.baseURL}/api/users/update`, {
         method: 'POST',
         headers: {'Content-type': 'application/json; charset=UTF-8'},
         body: JSON.stringify(id),
       })
-      const res = await response.json();
+      await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
@@ -61,11 +56,11 @@ export class ApiMethods {
 
   async delete(id) {
     try {
-      const response = await fetch(`${BASE_URL}/users/delete/${id}`, {
+      const response = await fetch(`${this.baseURL}/api/users/delete/${id}`, {
         method: 'GET',
       })
 
-      const res = await response.json();
+      await response.json();
     } catch (e) {
       console.warn('Error: ', e)
     }
@@ -78,5 +73,5 @@ export class ApiMethods {
   // .then(() => console.log(api.b));
 // console.log(b);
 // const c = new ApiMethods().update();
-// const d = new ApiMethods().delete('0eutqeRiTQvt4afe');
+// const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");
 // const table = new Interface().createTable();
