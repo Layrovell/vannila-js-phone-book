@@ -1,10 +1,10 @@
 import {ApiMethods} from "./apiMethods.js";
-import {Interface} from './interface.js';
+import {InterfaceApp} from './interfaceApp.js';
 
 export class Controllers {
   constructor({baseURL, node}) {
     this.api = new ApiMethods(baseURL);
-    this.Interface = new Interface(node, {
+    this.Interface = new InterfaceApp(node, {
       addItem: this.addItem.bind(this),
       delete: this.removeItem.bind(this),
       update: this.updateItem.bind(this),
@@ -12,11 +12,9 @@ export class Controllers {
     });
   }
 
-  async addItem(name, number, newContact) {
+  async addItem(name, number) {
     if (name && number) {
-      const response = await this.api.create(name, number);
-      newContact = response.newItem;
-      console.log(newContact);
+      await this.api.create(name, number);
     } else {
       console.log('Not all values are provided!');
     }

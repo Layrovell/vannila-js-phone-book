@@ -24,7 +24,6 @@ export class ApiMethods {
     } catch (e) {
       console.warn('Error: ', e)
     }
-    console.log(this.baseURL)
   }
 
   async create(name, number) {
