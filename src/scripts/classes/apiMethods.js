@@ -66,12 +66,3 @@ export class ApiMethods {
     }
   }
 }
-
-// const a = new ApiMethods().getAll();
-// console.log(a);
-// const b = new ApiMethods().create('45678903456', 'father')
-  // .then(() => console.log(api.b));
-// console.log(b);
-// const c = new ApiMethods().update();
-// const d = new ApiMethods().delete("KmBJwnc2N5rhxSrd");
-// const table = new Interface().createTable();
